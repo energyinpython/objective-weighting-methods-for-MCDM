@@ -1,4 +1,3 @@
-from re import M
 import numpy as np
 from correlations import *
 from normalizations import *
