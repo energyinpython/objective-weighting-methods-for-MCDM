@@ -33,8 +33,6 @@ def entropy_weighting(X, types):
 
 # standard deviation weighting
 def std_weighting(X, types):
-    # criteria_type = np.ones(np.shape(X)[1])
-    # X = minmax_normalization(X, criteria_type)
     # stdv = np.std(X, axis = 0)
     stdv = np.sqrt((np.sum(np.square(X - np.mean(X, axis = 0)), axis = 0)) / (X.shape[0]))
     return stdv / np.sum(stdv)
@@ -163,19 +161,3 @@ def coeff_var_weighting(X, types):
     ej = std / Bm
     w = ej / np.sum(ej)
     return w
-
-
-
-
-def main():
-    matrix = np.array([[30, 30, 38, 29],
-    [19, 54, 86, 29],
-    [19, 15, 85, 28.9],
-    [68, 70, 60, 29]])
-
-    types = np.ones(matrix.shape[1])
-    weights = coeff_var_weighting(matrix, types)
-    print(weights)
-
-if __name__ == '__main__':
-    main()
