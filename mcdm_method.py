@@ -4,6 +4,19 @@ import numpy as np
 class MCDM_method(ABC):
 
     def __call__(self, matrix, weights, types):
+        """
+        Score alternatives from decision matrix `matrix` using criteria weights `weights` and criteria types `types`
+
+        Parameters
+        ----------
+            matrix : ndarray
+                decision matrix with performance values for m alternatives in rows and n criteria in columns
+            weights : ndarray
+                vector with criteria weights with size equal to number of columns n of `matrix`
+            types : ndarray
+                vector with criteria types containing values of 1 for profit criteria and -1 for cost criteria
+                with size equal to number of columns n of `matrix`
+        """
         pass
 
     @staticmethod
