@@ -78,10 +78,9 @@ def main():
         dict_new_heatmap_rw.add(el, [])
 
     # heatmaps for correlations coefficients
-    for i in method_types[::-1]:
-        for j in method_types:
-            dict_new_heatmap_rw[j].append(weighted_spearman(results[i], results[j]))
-        
+    for i, j in [(i, j) for i in method_types[::-1] for j in method_types]:
+        dict_new_heatmap_rw[j].append(weighted_spearman(results[i], results[j]))
+            
     df_new_heatmap_rw = pd.DataFrame(dict_new_heatmap_rw, index = method_types[::-1])
     df_new_heatmap_rw.columns = method_types
 

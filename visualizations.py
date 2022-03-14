@@ -4,6 +4,22 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 def plot_barplot(df_plot, x_name, y_name, title):
+    """
+    Display column stacked column plot of weights for criteria for `x_name == Weighting methods`
+    and column plot of ranks for alternatives `x_name == Alternatives`
+
+    Parameters
+    ----------
+        df_plot : dataframe
+            dataframe with criteria weights for different weighting methods
+            or with alternaives rankings for different weighting methods
+        x_name : str
+            name of x axis, Alternatives or Weighting methods
+        y_name : str
+            name of y axis, Ranks or Weight values
+        title : str
+            name of plot title, Weighting methods or Criteria
+    """
     list_rank = np.arange(1, len(df_plot) + 1, 1)
     stacked = True
     width = 0.5
@@ -22,7 +38,6 @@ def plot_barplot(df_plot, x_name, y_name, title):
     ax.set_xticklabels(df_plot.index, rotation = 'horizontal')
     ax.tick_params(axis = 'both', labelsize = 12)
 
-
     plt.legend(bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',
     ncol=4, mode="expand", borderaxespad=0., edgecolor = 'black', title = title, fontsize = 12)
 
@@ -34,6 +49,16 @@ def plot_barplot(df_plot, x_name, y_name, title):
 
 
 def draw_heatmap(df_new_heatmap, title):
+    """
+    Display heatmap with correlations of compared rankings generated using different methods
+
+    Parameters
+    ----------
+    df_new_heatmap : dataframe
+        dataframe with correlation values between compared rankings
+    title : str
+        title of plot containing name of used correlation coefficient
+    """
     plt.figure(figsize = (8, 6))
     sns.set(font_scale=1.1)
     heatmap = sns.heatmap(df_new_heatmap, annot=True, fmt=".4f", cmap="RdYlBu",
