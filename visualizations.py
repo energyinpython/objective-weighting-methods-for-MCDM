@@ -5,20 +5,20 @@ import seaborn as sns
 
 def plot_barplot(df_plot, x_name, y_name, title):
     """
-    Display column stacked column plot of weights for criteria for `x_name == Weighting methods`
-    and column plot of ranks for alternatives `x_name == Alternatives`
+    Display column stacked column chart of weights for criteria for `x_name == Weighting methods`
+    and column chart of ranks for alternatives `x_name == Alternatives`
 
     Parameters
     ----------
         df_plot : dataframe
-            dataframe with criteria weights for different weighting methods
+            dataframe with criteria weights calculated different weighting methods
             or with alternaives rankings for different weighting methods
         x_name : str
             name of x axis, Alternatives or Weighting methods
         y_name : str
             name of y axis, Ranks or Weight values
         title : str
-            name of plot title, Weighting methods or Criteria
+            name of chart title, Weighting methods or Criteria
     """
     list_rank = np.arange(1, len(df_plot) + 1, 1)
     stacked = True
@@ -48,24 +48,45 @@ def plot_barplot(df_plot, x_name, y_name, title):
     plt.show()
 
 
-def draw_heatmap(df_new_heatmap, title):
+def draw_heatmap(data, title):
     """
     Display heatmap with correlations of compared rankings generated using different methods
 
     Parameters
     ----------
-    df_new_heatmap : dataframe
+    data : dataframe
         dataframe with correlation values between compared rankings
     title : str
-        title of plot containing name of used correlation coefficient
+        title of chart containing name of used correlation coefficient
     """
-    plt.figure(figsize = (8, 6))
-    sns.set(font_scale=1.1)
-    heatmap = sns.heatmap(df_new_heatmap, annot=True, fmt=".4f", cmap="RdYlBu",
+    plt.figure(figsize = (6, 4))
+    sns.set(font_scale=1.0)
+    heatmap = sns.heatmap(data, annot=True, fmt=".2f", cmap="RdYlBu",
                           linewidth=0.5, linecolor='w')
     plt.yticks(va="center")
     plt.xlabel('Weighting methods')
     plt.title('Correlation coefficient: ' + title)
     plt.tight_layout()
     plt.savefig('output/' + 'correlations.pdf')
+    plt.show()
+
+
+def plot_boxplot(data):
+    """
+    Display boxplot showing distribution of criteria weights determined with different methods.
+
+    Parameters
+    ----------
+    data : dataframe
+        dataframe with correlation values between compared rankings
+    """
+    df_melted = pd.melt(data)
+    plt.figure(figsize = (7, 4))
+    ax = sns.boxplot(x = 'variable', y = 'value', data = df_melted)
+    ax.grid(True)
+    ax.set_axisbelow(True)
+    ax.set_xlabel('Criterion', fontsize = 12)
+    ax.set_ylabel('Different weights distribution', fontsize = 12)
+    plt.tight_layout()
+    plt.savefig('output/weights_boxplot.pdf')
     plt.show()

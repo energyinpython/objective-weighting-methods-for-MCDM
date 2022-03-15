@@ -5,12 +5,22 @@ import copy
 import sys
 import itertools
 
-# for i, j in itertools.product(range(x), range(y)):
-# for (i,j) in [(i,j) for i in range(x) for j in range(y)]
-
 
 # equal weighting
 def equal_weighting(X, types):
+    """
+    Calculate criteria weights using objective Equal weighting method
+    Parameters
+    ----------
+        X : ndarray
+            Decision matrix with performance values of m alternatives and n criteria
+        types : ndarray
+
+    Returns
+    -------
+        ndarray
+            vector of criteria weights
+    """
     N = np.shape(X)[1]
     return np.ones(N) / N
 
